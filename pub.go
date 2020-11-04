@@ -10,9 +10,9 @@ func main() {
 
 	opts := []nats.Option{nats.Name("NATS Publisher")}
 
-	conn, error := nats.Connect(nats.DefaultURL, opts...)
-	if error != nil {
-		log.Fatal(error)
+	conn, err := nats.Connect(nats.DefaultURL, opts...)
+	if err != nil {
+		log.Fatal(err)
 	}
 	defer conn.Close()
 
@@ -22,8 +22,8 @@ func main() {
 
 	conn.Flush()
 
-	if error := conn.LastError(); error != nil {
-		log.Fatal(error)
+	if err := conn.LastError(); err != nil {
+		log.Fatal(err)
 	} else {
 		log.Printf("Published to [%s]: %s \n", subject, msg)
 	}
